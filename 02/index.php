@@ -38,3 +38,29 @@ if ($is_student === true) {
 // }
 
 // echo "<p>" . add($num1,$num2) . "</p>"
+
+// OOP with PHP {
+
+class Person {
+    public string $name;
+    public int $age; 
+    public bool $isInstructor; 
+    
+    public function __construct(string $name, int $age, bool $isInstructor) {
+        $this->name = $name; 
+        $this->age = $age; 
+        $this->isInstructor = $isInstructor;
+    }
+
+    public function getBadge(): string {
+        $role = $this->isInstructor ? "Instructor" : "Student"; 
+        return "Name : {$this->name} | Age: {$this->age} | Role : $role";
+    }
+}
+
+//create an instance of the object 
+
+$person = new Person("Jessica", 40, true); 
+
+echo $person->getBadge(); 
+?>
