@@ -19,7 +19,7 @@
         <input type="text" id="email" name="email">
     </fieldset>
 
-    <!-- Order Details -->
+    <!-- Order Details
     <fieldset>
       <legend>Order Details</legend>
 
@@ -89,7 +89,7 @@
         </tbody>
       </table>
 
-    </fieldset>
+    </fieldset> -->
 
     <fieldset>
       <legend>Additional Comments</legend>

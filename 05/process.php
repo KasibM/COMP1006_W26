@@ -1,5 +1,5 @@
 <?php
-
+//require database connection script
 require "includes/connect.php";  
 
 /*1*/
@@ -67,7 +67,25 @@ if (!empty($errors)) {
 }
 
 /*4*/
+//build query using named placeholders to prevent injections
+$sql = "INSERT INTO orders (first_name, last_name, phone, address, email, comments) VALUES (:first_name, :last_name, :phone, :address, :email, :comments)";
 
+//prepare the query
+$stmt = $pdo->prepare($sql);
+
+//map the named placeholder to the user data/actual data
+$stmt->bindParam(":first_name", $firstName );
+$stmt->bindParam(":last_name", $lastName);
+$stmt->bindParam(":phone", $phone);
+$stmt->bindParam(":address", $address);
+$stmt->bindParam(":email", $email);
+$stmt->bindParam(":comments", $comments);
+
+//execute the query
+$stmt->execute();
+
+//close connection
+$pdo = null;
 
 ?>
 <? require "includes/header.php"; ?> 
