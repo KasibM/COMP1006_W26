@@ -17,7 +17,7 @@ $sql = "INSERT INTO subscribers (first_name, last_name, email) VALUES (:first_na
 /*
   2. Prepare the statement
 */
-
+$stmt = $pdo->prepare($sql);
   
 /*
   3. Execute the statement with an array of values
