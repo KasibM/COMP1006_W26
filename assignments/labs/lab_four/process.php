@@ -4,6 +4,10 @@ require "includes/header.php";
 require "includes/connect.php";
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
+$firstName = 'first_name';
+$lastName = 'last_name';
+$email = 'email';
+
 
 /*
   1. Write an INSERT statement with named placeholders
@@ -39,3 +43,4 @@ require "includes/connect.php";
 </body>
 
 </html>
+<?php require "includes/header.php"?>
