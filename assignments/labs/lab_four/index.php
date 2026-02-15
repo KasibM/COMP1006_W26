@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php require "includes/header.php"?>
 <html lang="en">
 
 <head>
@@ -29,6 +30,8 @@
             <a href="subscribers.php">View Subscribers</a>
         </p>
     </main>
+    
 </body>
 
 </html>
+<?php require "includes/header.php"?>
