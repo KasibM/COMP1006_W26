@@ -28,8 +28,9 @@ $stmt->bindparam(":email", $email);
   3. Execute the statement with an array of values
 
 */
-
-
+$stmt->execute();
+//close connection by setting $pdo to null 
+$pdo = null;
 
 ?>
 <!DOCTYPE html>
