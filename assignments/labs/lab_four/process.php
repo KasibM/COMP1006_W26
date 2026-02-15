@@ -18,6 +18,11 @@ $sql = "INSERT INTO subscribers (first_name, last_name, email) VALUES (:first_na
   2. Prepare the statement
 */
 $stmt = $pdo->prepare($sql);
+
+//map placeholder values
+$stmt->bindparam(":first_name", $firstName);
+$stmt->bindparam(":last_name", $lastName);
+$stmt->bindparam(":email", $email);
   
 /*
   3. Execute the statement with an array of values
