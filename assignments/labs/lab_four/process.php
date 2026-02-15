@@ -11,11 +11,20 @@ $email = 'email';
 
 /*
   1. Write an INSERT statement with named placeholders
+*/
+//sql query with placeholders for adding the data
+$sql = "INSERT INTO subscribers (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
+/*
   2. Prepare the statement
+*/
+
+  
+/*
   3. Execute the statement with an array of values
-  4.
 
 */
+
+
 
 ?>
 <!DOCTYPE html>
@@ -43,4 +52,4 @@ $email = 'email';
 </body>
 
 </html>
-<?php require "includes/header.php"?>
+<?php require "includes/header.php" ?>
