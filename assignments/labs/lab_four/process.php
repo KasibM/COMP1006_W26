@@ -4,9 +4,9 @@ require "includes/header.php";
 require "includes/connect.php";
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
-$firstName = 'first_name';
-$lastName = 'last_name';
-$email = 'email';
+$firstName = $_POST['first_name'];
+$lastName = $_POST['last_name'];
+$email = $_POST['email'];
 
 
 /*
@@ -33,6 +33,7 @@ $stmt->execute();
 $pdo = null;
 
 ?>
+<? require "includes/header.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +50,9 @@ $pdo = null;
 
         <!-- TODO: Display a confirmation message -->
         <!-- Example: "Thanks, Name! You have been added to our mailing list." -->
-
+        <p>
+            Thanks <?php echo $firstName?>! You have been added to our mailing list. At any point if you wish to unsubscribe, unfortunately that feature is not available yet. We won't hesitate to email you at least 30 times per day for the foreseable future. 
+        </p>
 
         <p class="mt-3">
             <a href="subscribers.php">View Subscribers</a>
@@ -58,4 +61,4 @@ $pdo = null;
 </body>
 
 </html>
-<?php require "includes/header.php" ?>
+<?php require "includes/footer.php"; ?>
