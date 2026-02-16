@@ -1,6 +1,8 @@
 <?php
 //TODO:
+require "includes/header.php";
 require "includes/connect.php";
+
 
 /*
   TODO:
@@ -11,9 +13,8 @@ require "includes/connect.php";
   5. Fetch all results into $subscribers
 */
 //Select query and order by
-$sql = "SELECT first_name last_name AS Subscriber, subscribed_at FROM subscribers ORDER BY subscribed_at DESC";
-
-$subscribers = []; 
+$sql = "SELECT * FROM subscribers ORDER BY subscribed_at DESC";
+ 
 
 //prepare the statement
 $stmt = $pdo->prepare($sql);
@@ -21,8 +22,14 @@ $stmt = $pdo->prepare($sql);
 //execute the statement
 $stmt-> execute();
 
+//fetch results of query 
+$subscribers = $stmt->fetchAll();
+
+
 //close connection
 $pdo = null;
+
+
 
 
 ?>
@@ -45,6 +52,25 @@ $pdo = null;
       </thead>
       <tbody>
         <!-- TODO: Loop through $subscribers and output each row -->
+        <?php foreach ($subscribers as $subscriber): ?>
+          <tr>
+            <td>
+              <?= htmlspecialchars($subscriber['id']);?>
+            </td>
+            <td>
+              <?= htmlspecialchars($subscriber['first_name']);?>
+            </td>
+            <td>
+              <?= htmlspecialchars($subscriber['last_name']);?>
+            </td>
+            <td>
+              <?= htmlspecialchars($subscriber['email']);?>
+            </td>
+            <td>
+              <?= htmlspecialchars($subscriber['subscribed_at']);?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   <?php endif; ?>
