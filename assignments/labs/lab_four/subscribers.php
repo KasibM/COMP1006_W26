@@ -2,8 +2,6 @@
 //TODO:
 require "includes/header.php";
 require "includes/connect.php";
-
-
 /*
   TODO:
   1. Write a SELECT query to get all subscribers
@@ -15,7 +13,6 @@ require "includes/connect.php";
 //Select query and order by
 $sql = "SELECT * FROM subscribers ORDER BY subscribed_at DESC";
  
-
 //prepare the statement
 $stmt = $pdo->prepare($sql);
 
@@ -25,12 +22,8 @@ $stmt-> execute();
 //fetch results of query 
 $subscribers = $stmt->fetchAll();
 
-
 //close connection
 $pdo = null;
-
-
-
 
 ?>
 
