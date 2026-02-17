@@ -9,5 +9,10 @@
     </head>
     <body>
         <header>
-            <h1 >Time Tracker</h1> 
+            <!-- https://getbootstrap.com/docs/5.3/components/navbar/ -->
+           <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Time Tracker</span>
+                </div>
+            </nav>
         </header>
