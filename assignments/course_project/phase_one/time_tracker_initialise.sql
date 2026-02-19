@@ -1,4 +1,4 @@
-CREATE TABLE task (
+CREATE TABLE tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   task_name VARCHAR(100),
   task_category  VARCHAR(100),
