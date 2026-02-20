@@ -4,7 +4,7 @@ require "includes/connect.php";
 require "includes/header.php";
 
 //build query with named placeholder 
-$sql = "SELECT * FROM tasks";
+$sql = "SELECT * FROM tasks ORDER BY task_status, task_due_date, task_priority, task_category";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -61,7 +61,7 @@ $_pdo = null;
                             <?= htmlspecialchars($task['task_time']);?>
                         </td>
                         <td>
-                            <?php if ($task['task_status'] === "1" ): ?>
+                            <?php if ($task['task_status'] === 1 ): ?>
                                 Complete
                             <?php else: ?>
                                 Incomplete
