@@ -37,6 +37,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             //prepare the query
             $stmt = $pdo->prepare($sql);
 
+            //bind param to placeholder
             $stmt -> bindParam(':selected_category', $selectedCategory);
 
             //execute the query
