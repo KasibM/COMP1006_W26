@@ -30,14 +30,14 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         <?php if (!empty($_POST)): //if category has been chosen
             //build query selecting only tasks within the chosen category, .implode() turns the array of category names (only one name in this case) into a string
-            $sql = "SELECT task_name FROM tasks WHERE task_category = \":selected_category\"";
+            $sql = "SELECT task_name FROM tasks WHERE task_category = :selected_category";
 
             $selectedCategory = implode($_POST);
 
-            $stmt -> bindParam(':selected_category', $selectedCategory);
-
             //prepare the query
             $stmt = $pdo->prepare($sql);
+
+            $stmt -> bindParam(':selected_category', $selectedCategory);
 
             //execute the query
             $stmt->execute();
