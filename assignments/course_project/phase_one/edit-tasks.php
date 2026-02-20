@@ -43,6 +43,9 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             //execute the query
             $stmt->execute();
 
+            //close connection
+            $_pdo = null;
+
             //fetch task names of tasks in the selected category
             $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);    
         ?>
