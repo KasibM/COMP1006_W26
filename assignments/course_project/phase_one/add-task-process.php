@@ -1,6 +1,7 @@
 <?php
 //require database connection script
 require "includes/connect.php"; 
+require "includes/header.php";
 
 //check if post
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -8,48 +9,58 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 //get + sanitise values
-$task_name      = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
-$task_category  = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
-$task_priority  = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
-$task_due_date  = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
-$task_time      = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
-$task_status    = trim(filter_input(INPUT_POST,'',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskName      = trim(filter_input(INPUT_POST,'task_name',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskCategory  = trim(filter_input(INPUT_POST,'task_category',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskPriority  = trim(filter_input(INPUT_POST,'task_priority',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskDueDate  = trim(filter_input(INPUT_POST,'task_due_date',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskTime      = trim(filter_input(INPUT_POST,'task_time',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskStatus    = trim(filter_input(INPUT_POST,'task_status',FILTER_SANITIZE_SPECIAL_CHARS));
 
 
 //validation
 
 $errors = [];
 
-if($task_name === null || $task_name === ''){
+if($taskName === null || $taskName === ''){
     $errors[]= "task_name is required.";
 }
 
-if($task_category === null || $task_category === ''){
+if($taskCategory === null || $taskCategory === ''){
     $errors[]= "task_category is required";
 }
 
-if($task_priority !== "Low" && $task_priority !== "Medium" && $task_priority !== "High"){
+if($taskPriority !== "Low" && $taskPriority !== "Medium" && $taskPriority !== "High"){
     $errors[]= "task_priority must be 'Low', 'Medium', or 'High";
 }
-//left off here feb 17
-if($task_due_date === null || $task_due_date === ''){
+
+if($taskDueDate === null || $taskDueDate === ''){
     $errors[]= "task_due_date is required.";
-} else if(!filter_var($task_due_date, FILTER_VALIDATE_REGEXP, ['options'=> ['regexp' => '']] )){
+} else if(!filter_var($taskDueDate, FILTER_VALIDATE_REGEXP, ['options'=> ['regexp' => '/^\d{4}-\d{2}-\d{2}$/']] )){
+    $errors[]= "task_due_date is not in required format expected: 'YYYY-MM-DD', received: '".$taskDueDate."'.";
+} 
 
+if($taskTime === null || $taskTime ===''){
+    $taskTime= 0;
+} else if(!filter_var($taskTime, FILTER_VALIDATE_FLOAT)){
+    $errors[]= "task_time must be a float.";
 }
 
-if($task_time){
-    $errors[]= "";
-}
-
-if($task_status){
-    $errors[]= "";
+if(!($taskStatus === '0' || $taskStatus === '1')){
+    $errors[]= "task_status must be 0 or 1.";
 }
 
 //if errors stop before inserting into the database
+if (!empty($errors)) { ?>
+    <?php echo "Failed to insert data due to the following errors:\n";
+    foreach ($errors as $error) : ?>
+        <li><?php echo $error; ?> </li>
+<?php endforeach;
+    //stop the script from executing  
+    exit;
+}
 
 //build query with named placeholder 
-$sql = "INSERT INTO task (task_name, task_category, task_priority, task_due_date, task_time, task_status";
+$sql = "INSERT INTO tasks (task_name, task_category, task_priority, task_due_date, task_time, task_status) VALUES (:task_name, :task_category, :task_priority, :task_due_date, :task_time, :task_status)";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -57,17 +68,44 @@ $stmt = $pdo->prepare($sql);
 //map named placeholder to data
 //e.g. $stmt -> bindParam(":first_name", firstName);
 
+$stmt -> bindParam(':task_name', $taskName);
+$stmt -> bindParam(':task_category', $taskCategory);
+$stmt -> bindParam(':task_priority', $taskPriority);
+$stmt -> bindParam(':task_due_date', $taskDueDate);
+$stmt -> bindParam(':task_time', $taskTime);
+$stmt -> bindParam(':task_status', $taskStatus);
+
 //execute the query
-$stmt->execute();
+$stmt -> execute();
 
 //close connection
 $_pdo = null;
 
+
+//translate $taskStatus variable for display
+$taskStatusWord;
+if ($taskStatus === "1") {
+    $taskStatusWord = "Yes";
+} else {
+    $taskStatusWord = "No";
+}
 ?>
 <!-- display in html -->
-<? require "includes/header.php"; ?> 
+ 
 <main>
-
-
+    <div class = "container-sm">
+        <br>
+        <h2>Task Added</h2>
+        <p><?php echo "Task: ".$taskName.", from ".$taskCategory." was added successfully.
+        <br>Priority: ".$taskPriority.
+        "<br>Due: ".$taskDueDate.
+        "<br>Hours added: ".$taskTime.
+        "<br>Complete: ".$taskStatusWord?>
+        </p>
+        <p>
+            <a href="/COMP1006_W26/assignments/course_project/phase_one/" class="nav-link-active">New Task</button>
+        </p>
+        
+    </div>
 </main>
 <?php require "includes/footer.php"; ?>
