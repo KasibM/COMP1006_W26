@@ -30,7 +30,11 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         <?php if (!empty($_POST)): //if category has been chosen
             //build query selecting only tasks within the chosen category, .implode() turns the array of category names (only one name in this case) into a string
-            $sql = "SELECT task_name FROM tasks WHERE task_category = \"".implode($_POST)."\"";
+            $sql = "SELECT task_name FROM tasks WHERE task_category = \":selected_category\"";
+
+            $selectedCategory = implode($_POST);
+
+            $stmt -> bindParam(':selected_category', $selectedCategory);
 
             //prepare the query
             $stmt = $pdo->prepare($sql);
@@ -50,7 +54,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                     <br>
                     <!-- Find Task  -->
                     <p>Category: <?= implode($_POST) ?></p>
-                    <label for="task_category" class="form-label">Select Task</label>
+                    <label for="task_category" class="form-label">Choose Task to Edit</label>
                     <select id="task_category" name="task_category" class="form-control" required>
                         <option value="">Select</option>
                         <?php foreach ($tasks as $task): 
@@ -76,7 +80,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                 <fieldset>
                     <br>
                     <legend>Edit Task</legend>
-                    <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything-->
+                    <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
                     <br>
                     <br>
                     <!-- Find Task  -->

@@ -61,7 +61,7 @@ $_pdo = null;
                             <?= htmlspecialchars($task['task_time']);?>
                         </td>
                         <td>
-                            <?php if ($task['task_status'] === 1 ): ?>
+                            <?php if ($task['task_status'] === 1 ): //saved as SQL boolean 0=false, 1=true ?>
                                 Complete
                             <?php else: ?>
                                 Incomplete

@@ -17,7 +17,7 @@ require 'includes/header.php';
             <fieldset>
                 <br>
                 <legend>Add Task</legend>
-                <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything-->
+                <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
                 <br>
                 <br>
                 <!-- Name  -->
