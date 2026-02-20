@@ -63,7 +63,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         <option value="">Select</option>
                         <?php foreach ($tasks as $task): 
                             // for through all tasks creating a selectable option for each ?>
-                            <option value="<?= $task['id'] ?>"><?= $task['id'].". ".$task['task_name']; ?></option>
+                            <option value="<?= htmlspecialchars($task['id']); ?>"><?= htmlspecialchars($task['id'].". ".$task['task_name']); ?></option>
                         <?php endforeach; ?>
 
                     </select>
@@ -93,7 +93,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         <option value="">Select</option>
                         <?php foreach ($categories as $category): 
                             // for through all tasks creating a selectable option for each ?>
-                            <option value="<?= $category ?>"><?= $category; ?></option>
+                            <option value="<?= htmlspecialchars($category); ?>"><?= htmlspecialchars($category); ?></option>
                         <?php endforeach; ?>
 
                     </select>
