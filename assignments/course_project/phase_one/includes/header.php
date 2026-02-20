@@ -24,11 +24,11 @@
                         </li>
                         <!-- View All Tasks -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">View All</a>
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/view-all-tasks.php">View All</a>
                         </li>
                         <!-- Edit Tasks -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">Edit</a>
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/edit-tasks.php">Edit</a>
                         </li>
                         <!-- Remove Tasks -->
                         <li class="nav-item">
