@@ -13,9 +13,28 @@
     <body>
         <header>
             <!-- https://getbootstrap.com/docs/5.3/components/navbar/ -->
-           <nav class="navbar bg-body-tertiary">
-                <div class="container-fluid">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid  justify-content-start">
                     <span class="navbar-brand mb-0 h1">Time Tracker</span>
+                    <!-- Nav Tabs  -->
+                    <ul class="nav nav-tabs">
+                        <!-- Add New Tasks  -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">Add</a>
+                        </li>
+                        <!-- View All Tasks -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">View All</a>
+                        </li>
+                        <!-- Edit Tasks -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">Edit</a>
+                        </li>
+                        <!-- Remove Tasks -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">Remove</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </header>
