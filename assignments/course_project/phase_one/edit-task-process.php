@@ -3,8 +3,6 @@ require "includes/connect.php";
 require 'includes/header.php';
 
 
-
-
 //check if post
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Invalid request');
@@ -40,12 +38,17 @@ endif;
 
 <main>
     <div class = "container-sm">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="update-task-process.php" method="post">
             <fieldset>
                 <br>
                 <legend>Edit Task</legend>
                 <p>ID: <?= htmlspecialchars($task['id']); ?> - Name: <?= htmlspecialchars($task['task_name']); ?></p>
                 <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
+                <br>
+                <!-- Name  -->
+                <p>Is this the correct task?</p>
+                <input class="form-check-input" type="checkbox" id="task_id" name="task_status" value="<?= htmlspecialchars($task['id']); ?>" required />
+                <label for="task_id" class="form-label">Yes</label>
                 <br>
                 <br>
                 <!-- Name  -->
@@ -90,7 +93,7 @@ endif;
             <br>
             <!-- Submit Button  -->
             <p>
-                <button type="submit">Save Changes</button>
+                <button type="submit" >Save Changes</button>
                 
             </p>
             <br>
