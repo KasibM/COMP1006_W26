@@ -49,7 +49,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             //fetch task names of tasks in the selected category
             $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);    
         ?>
-            <form action="" method="post"> 
+            <form action="edit-task-process.php" method="post"> 
                 <fieldset>
                     <br>
                     <legend>Edit Task</legend>
