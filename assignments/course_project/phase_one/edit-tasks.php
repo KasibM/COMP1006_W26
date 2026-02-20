@@ -58,8 +58,8 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                     <br>
                     <!-- Find Task  -->
                     <p>Category: <?= $selectedCategory ?></p>
-                    <label for="task_category" class="form-label">Choose Task to Edit</label>
-                    <select id="task_category" name="task_category" class="form-control" required>
+                    <label for="task_id" class="form-label">Choose Task to Edit</label>
+                    <select id="task_id" name="task_id" class="form-control" required>
                         <option value="">Select</option>
                         <?php foreach ($tasks as $task): 
                             // for through all tasks creating a selectable option for each ?>
