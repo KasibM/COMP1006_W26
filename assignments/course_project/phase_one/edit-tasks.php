@@ -30,7 +30,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         <?php if (!empty($_POST)): //if category has been chosen
             //build query selecting only tasks within the chosen category, .implode() turns the array of category names (only one name in this case) into a string
-            $sql = "SELECT task_name FROM tasks WHERE task_category = :selected_category";
+            $sql = "SELECT id, task_name FROM tasks WHERE task_category = :selected_category";
 
             $selectedCategory = implode($_POST);
 
@@ -44,7 +44,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             $stmt->execute();
 
             //fetch task names of tasks in the selected category
-            $tasks = $stmt->fetchAll(PDO::FETCH_COLUMN);    
+            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);    
         ?>
             <form action="" method="post"> 
                 <fieldset>
@@ -60,7 +60,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         <option value="">Select</option>
                         <?php foreach ($tasks as $task): 
                             // for through all tasks creating a selectable option for each ?>
-                            <option value="<?= $task ?>"><?= $task; ?></option>
+                            <option value="<?= $task['id'] ?>"><?= $task['id'].". ".$task['task_name']; ?></option>
                         <?php endforeach; ?>
 
                     </select>
