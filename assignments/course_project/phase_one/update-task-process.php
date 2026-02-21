@@ -38,8 +38,6 @@ if($taskTime === null || $taskTime === ''){
     $errors[] = "task_time must be a float.";
 } 
 
-
-
 //if errors stop before inserting into the database
 if (!empty($errors)) { ?>
     <?php echo "Failed to insert data due to the following errors:\n";
@@ -50,17 +48,54 @@ if (!empty($errors)) { ?>
     exit;
 }
 
-
-
-
-
-
-
-
+//since editing has optional field, must retrieve old data to resubmit if it is not changed, or else PDO has a fit
 
 
 //build query with named placeholder 
-$sql = "UPDATE tasks SET WHERE id = :task_id";
+$sql = "SELECT * FROM tasks WHERE id = :selected_task";
+
+//prepare the query
+$stmt = $pdo->prepare($sql);
+
+//bind param to placeholder
+$stmt -> bindParam(':selected_task', $taskID);
+
+//execute the query
+$stmt -> execute();
+
+//fetch query results
+$task = $stmt->fetch();
+
+
+//replace empty with original values
+if($taskName === null || $taskName === ''){
+    $taskName = $task['task_name'];
+}
+if($taskCategory === null || $taskCategory === ''){
+    $taskCategory = $task['task_category'];
+}
+if($taskPriority === null || $taskPriority === ''){
+    $taskPriority = $task['task_priority'];
+}
+if($taskDueDate === null || $taskDueDate === ''){
+    $taskDueDate = $task['task_due_date'];
+}
+if($taskTime === null || $taskTime === ''){
+    $taskTime= $task['task_time'];
+}
+if($taskStatus === null || $taskStatus === ''){
+    $taskStatus = $task['task_status'];
+}
+
+//build query with named placeholder 
+$sql = "UPDATE tasks 
+        SET task_name = :task_name,
+            task_category = :task_category,
+            task_priority = :task_priority,
+            task_due_date = :task_due_date,
+            task_time = :task_time,
+            task_status = :task_status
+        WHERE id = :task_id";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -78,12 +113,10 @@ $stmt -> bindParam(':task_status', $taskStatus);
 
 
 //execute the query
-//$stmt -> execute();
+$stmt -> execute();
 
 //close connection
 $_pdo = null;
-
-
 
 
 $taskStatusWord;
@@ -101,7 +134,7 @@ if ($taskStatus === "1") {
         <h2>Task Updated</h2>
         <p><?php echo "Task: ".$taskName.", from ".$taskCategory." was added successfully.
         <br>Priority: ".$taskPriority.
-        "<br>Due: ".$taskDueDate.
+        "<br>Due: ".date("M d, Y", strtotime($taskDueDate)).
         "<br>Hours added: ".$taskTime.
         "<br>Complete: ".$taskStatusWord?>
         </p>
