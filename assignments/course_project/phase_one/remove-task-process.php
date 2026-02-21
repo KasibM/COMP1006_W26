@@ -59,7 +59,7 @@ $_pdo = null;
         <h2>Task Removed Successfully.</h2>
         <br>
         <p>
-            <a href="select-task-remove.php" class="nav-link-active">Remove New Task</a>
+            <a href="select-task-remove.php" class ="btn btn-secondary">Remove New Task</a>
         </p>
         
     </div>

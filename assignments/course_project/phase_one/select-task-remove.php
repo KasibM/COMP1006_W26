@@ -52,7 +52,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             <form action="remove-task.php" method="post"> 
                 <fieldset>
                     <br>
-                    <legend>Edit Task</legend>
+                    <legend>Remove Task</legend>
                     <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything-->
                     <br>
                     <br>
@@ -83,7 +83,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <fieldset>
                     <br>
-                    <legend>Edit Task</legend>
+                    <legend>Remove Task</legend>
                     <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
                     <br>
                     <br>
