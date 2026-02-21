@@ -49,7 +49,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             //fetch task names of tasks in the selected category
             $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);    
         ?>
-            <form action="edit-task-process.php" method="post"> 
+            <form action="edit-task.php" method="post"> 
                 <fieldset>
                     <br>
                     <legend>Edit Task</legend>
@@ -72,7 +72,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                     <!-- Submit Button  https://getbootstrap.com/docs/4.0/components/button-group/-->
                     <div class="btn-group" role="group">
                         <!-- reset $_post by re-entering the page  -->
-                        <a class ="btn btn-secondary" href="edit-tasks.php">Reset</a>
+                        <a class ="btn btn-secondary" href="select-task-edit.php">Reset</a>
                         <button type="submit" id="task-selected" class="btn btn-secondary">Confirm</button>
                         </div>
                 </fieldset>

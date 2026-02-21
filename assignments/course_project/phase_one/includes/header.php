@@ -28,7 +28,7 @@
                         </li>
                         <!-- Edit Tasks -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="edit-tasks.php">Edit</a>
+                            <a class="nav-link active" href="select-task-edit.php">Edit</a>
                         </li>
                         <!-- Remove Tasks -->
                         <li class="nav-item">
