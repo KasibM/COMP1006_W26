@@ -47,7 +47,7 @@ endif;
                 <br>
                 <!-- Name  -->
                 <p>Is this the correct task?</p>
-                <input class="form-check-input" type="checkbox" id="task_id" name="task_status" value="<?= htmlspecialchars($task['id']); ?>" required />
+                <input class="form-check-input" type="checkbox" id="task_id" name="task_id" value="<?= htmlspecialchars($selectedTask); ?>" required />
                 <label for="task_id" class="form-label">Yes</label>
                 <br>
                 <br>
