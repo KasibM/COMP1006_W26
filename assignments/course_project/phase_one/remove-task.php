@@ -44,10 +44,10 @@ endif;
                 <legend>Remove Task</legend>
                 <p>ID: <?= htmlspecialchars($task['id']); ?> - Name: <?= htmlspecialchars($task['task_name']); ?></p>
                 <p>Category: <?= htmlspecialchars($task['task_category']); ?></p>
-                <p>Priority: <?= htmlspecialchars($task['task_category']); ?></p>
+                <p>Priority: <?= htmlspecialchars($task['task_priority']); ?></p>
                 <p>Due Date: <?= htmlspecialchars(date("M d, Y", strtotime($task['task_due_date']))); ?></p>
-                <p>Time Spent (h): <?= htmlspecialchars($task['task_category']); ?></p>
-                <p>Status: <?= htmlspecialchars($task['task_category']); ?></p>
+                <p>Time Spent (h): <?= htmlspecialchars($task['task_time']); ?></p>
+                <p>Status: <?= htmlspecialchars($task['task_status']); ?></p>
                 <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
                 <br>
                 <!-- Name  -->
