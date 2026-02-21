@@ -1,74 +1,79 @@
 <?php
+//require database connection script
+require "includes/connect.php"; 
+require "includes/header.php";
 
+//build query with named placeholder 
+$sql = "SELECT * FROM tasks ORDER BY task_status, task_due_date, task_priority, task_category";
 
+//prepare the query
+$stmt = $pdo->prepare($sql);
 
+//execute the query
+$stmt -> execute();
 
+//fetch query results
+$tasks = $stmt->fetchALL();
 
+//close connection
+$_pdo = null;
 
 ?>
-
-<?php
-require 'includes/header.php';
-?>
-
+<!-- display in html -->
+ 
 <main>
     <div class = "container-sm">
-        <form action="add-task-process.php" method="post">
-            <fieldset>
-                <br>
-                <legend>Add Task</legend>
-                <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
-                <br>
-                <br>
-                <!-- Name  -->
-                <label for="task_name" class="form-label">Task Name</label>
-                <input type="text" id="task_name" name="task_name" class="form-control" required />
-                <br>
-                <!-- Category  -->
-                <label for="task_category" class="form-label">Category</label>
-                <input type="text" id="task_category" name="task_category" class="form-control" required />
-                <br>
-                <!-- Priority  -->
-                <label for="task_priority" class="form-label">Priority</label>
-                <select id="task_priority" name="task_priority" class="form-control" required>
-                    <option value="">Select</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                </select>
-                <br>
-                <!-- Due Date  -->
-                <label for="task_due_date" class="form-label">Due Date</label>
-                <input type="date" id="task_due_date" name="task_due_date" class="form-control" required />
-                <br>
-                <!-- Task Time  -->
-                <label for="task_time" class="form-label">Time in Hours Spent</label>
-                <input type="number" id="task_time" name="task_time" step="0.5" min="0.0" max="12.0" placeholder="Hour(s)" class="form-control" />
-            </fieldset>
-            <br>
-            <fieldset>
-                <!-- Task Status  -->
-                <legend>Task Status</legend>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_incomplete" name="task_status" value="0" required />
-                    <label class="form-check-label" for="task_status_incomplete">Incomplete</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_complete" name="task_status" value="1" required />
-                    <label class="form-check-label" for="task_status_complete">Complete</label>
-                </div>
-            </fieldset>
-            <br>
-            <!-- Submit Button  -->
-            <p>
-                <button class="btn btn-secondary" type="submit">Add Task</button>
-                
-            </p>
-            <br>
-            <br>
-            <br>
-        </form>
+        <br>
+        <h2>Tasks</h2>
+
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Time Spent (h)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($tasks as $task): ?>
+                    <tr>
+                        <td>
+                            <?= htmlspecialchars($task['id']);?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($task['task_name']);?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($task['task_category']);?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($task['task_priority']);?>
+                        </td>
+                        <td>
+                            <!-- converts YYYY-MM-DD to Month (short) day, year -->
+                            <?= htmlspecialchars(date("M d, Y", strtotime($task['task_due_date'])));?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($task['task_time']);?>
+                        </td>
+                        <td>
+                            <?php if ($task['task_status'] === 1 ): //saved as SQL boolean 0=false, 1=true ?>
+                                Complete
+                            <?php else: ?>
+                                Incomplete
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+        
+        
     </div>
 </main>
-
-<?php require 'includes/footer.php'; ?>
+<?php require "includes/footer.php"; ?>

@@ -18,13 +18,13 @@
                     <span class="navbar-brand mb-0 h1">Time Tracker</span>
                     <!-- Nav Tabs  -->
                     <ul class="nav nav-tabs">
+                        <!-- Index/View All Tasks -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php">View All</a>
+                        </li>
                         <!-- Add New Tasks  -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.php">Add</a>
-                        </li>
-                        <!-- View All Tasks -->
-                        <li class="nav-item">
-                            <a class="nav-link active" href="view-all-tasks.php">View All</a>
+                            <a class="nav-link active" href="add-task.php">Add</a>
                         </li>
                         <!-- Edit Tasks -->
                         <li class="nav-item">
