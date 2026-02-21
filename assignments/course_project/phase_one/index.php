@@ -61,7 +61,7 @@ require 'includes/header.php';
             <br>
             <!-- Submit Button  -->
             <p>
-                <button type="submit">Add Task</a>
+                <button class="btn btn-secondary" type="submit">Add Task</button>
                 
             </p>
             <br>
