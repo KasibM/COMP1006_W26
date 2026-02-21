@@ -32,7 +32,7 @@
                         </li>
                         <!-- Remove Tasks -->
                         <li class="nav-item">
-                            <a class="nav-link active" href="/COMP1006_W26/assignments/course_project/phase_one/">Remove</a>
+                            <a class="nav-link active" href="select-task-remove.php">Remove</a>
                         </li>
                     </ul>
                 </div>
