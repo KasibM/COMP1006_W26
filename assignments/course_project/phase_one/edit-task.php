@@ -93,7 +93,7 @@ endif;
             <br>
             <!-- Submit Button  -->
             <p>
-                <button type="submit" >Save Changes</button>
+                <button class="btn btn-secondary" type="submit" >Save Changes</button>
                 
             </p>
             <br>
