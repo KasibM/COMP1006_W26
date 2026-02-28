@@ -23,7 +23,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             //build query selecting only tasks within the chosen category, .implode() turns the array of category names (only one name in this case) into a string
             $sql = "SELECT id, task_name FROM tasks WHERE task_category = :selected_category";
 
-            $selectedCategory = trim(filter_input(INPUT_POST,'task_category',FILTER_SANITIZE_SPECIAL_CHARS));;
+            $selectedCategory = trim(filter_input(INPUT_POST,'task_category',FILTER_SANITIZE_SPECIAL_CHARS));
 
             //prepare the query
             $stmt = $pdo->prepare($sql);
