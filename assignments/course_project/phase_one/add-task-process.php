@@ -103,7 +103,7 @@ if ($taskStatus === "1") {
         "<br>Complete: ".$taskStatusWord?>
         </p>
         <p>
-            <a href="index.php" class="nav-link-active">New Task</button>
+            <a href="add-task.php" class="nav-link-active">New Task</button>
         </p>
         
     </div>

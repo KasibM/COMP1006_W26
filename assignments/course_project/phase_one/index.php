@@ -5,7 +5,7 @@ require "includes/header.php";
 
 $whereCondition = " WHERE ";
 
-if (empty($_POST)) {
+if (implode($_POST) === "" || implode($_POST) === null) {
     //build query 
     $sql = "SELECT * FROM tasks ORDER BY task_status, task_due_date, task_priority, task_category";
 
@@ -19,6 +19,7 @@ if (empty($_POST)) {
     $tasks = $stmt->fetchALL();
 
 } else {
+    //echo "Echo: ".implode($_POST);
     $filteredCategory = trim(filter_input(INPUT_POST,'filter_category',FILTER_SANITIZE_SPECIAL_CHARS));
     $filteredStatus = trim(filter_input(INPUT_POST,'filter_status',FILTER_SANITIZE_SPECIAL_CHARS));
 

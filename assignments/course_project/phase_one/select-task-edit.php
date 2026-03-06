@@ -65,7 +65,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
                         <!-- reset $_post by re-entering the page  -->
                         <a class ="btn btn-secondary" href="select-task-edit.php">Reset</a>
                         <button type="submit" id="task-selected" class="btn btn-secondary">Confirm</button>
-                        </div>
+                    </div>
                 </fieldset>
             </form>
 
