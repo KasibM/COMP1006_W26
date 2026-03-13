@@ -1,5 +1,5 @@
 <?php 
-$host = "localhost"; //hostname
+$host = "localhost:50000"; //hostname
 $db = "bitumi"; //database name
 $user = "root"; //username
 $password = ""; //password
