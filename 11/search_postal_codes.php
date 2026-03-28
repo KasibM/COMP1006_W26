@@ -24,7 +24,7 @@ if (isset($_POST['search_jokes'])) {
     //validate that the user entered a search term 
     if ($searchTerm !== "") {
         //build the URL with search term appended 
-        $url = "https://icanhazdadjoke.com/search?term=" . urlencode($searchTerm);
+        $url = "https://www.geonames.org/postalcode-search.html?q=" . urlencode($searchTerm);
 
         //use headers to tell the API we want JSON returned
         $options = [
@@ -43,9 +43,10 @@ if (isset($_POST['search_jokes'])) {
 
         //check we get a response 
         if ($response !== false) {
-            //convert the JSON response into a PHP associative array 
+            // convert the JSON response into a PHP associative array 
+            var_dump($response);
             $data = json_decode($response, true);
-            //r_dump($data);
+            var_dump($data);
             $jokes = $data['results'];
             if (count($jokes) == 0) {
                 $message = "Sorry, no jokes about that";
