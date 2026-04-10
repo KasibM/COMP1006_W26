@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             required>
 
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary">Create Account</button>
+        <button type="submit" class="btn btn-secondary">Create Account</button>
 
         <!-- Link to login page -->
         <a href="login.php" class="btn btn-secondary">Login Instead</a>

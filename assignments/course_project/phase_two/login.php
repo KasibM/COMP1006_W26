@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         >
 
         <!-- Submit button -->
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-secondary">Login</button>
 
         <!-- Link to registration page -->
         <a href="register.php" class="btn btn-secondary">Create Account</a>

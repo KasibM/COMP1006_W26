@@ -8,7 +8,7 @@ require "includes/header.php";
 
 //Check if logged in
 if (empty($_SESSION["user_id"])) {
-    $userDisplay = 'You must be logged in to view tasks.  <a class="btn btn-secondary" href="login.php">Log in</a>';
+    $userDisplay = 'You must be logged in to view tasks.  <br><a class="btn btn-secondary" href="login.php">Log in</a>';
 } else {
     $userDisplay = "'s Tasks";
 }
