@@ -8,7 +8,7 @@ require "includes/header.php";
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Invalid request');
 }
-
+ 
 //get + sanitise values
 $taskID      = trim(filter_input(INPUT_GET,'id',FILTER_SANITIZE_SPECIAL_CHARS));
 $taskName      = trim(filter_input(INPUT_POST,'task_name',FILTER_SANITIZE_SPECIAL_CHARS));

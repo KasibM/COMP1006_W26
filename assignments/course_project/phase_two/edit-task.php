@@ -2,7 +2,7 @@
 require "includes/connect.php";
 require "includes/auth.php";
 require 'includes/header.php';
-
+ 
 
 //check if post
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {

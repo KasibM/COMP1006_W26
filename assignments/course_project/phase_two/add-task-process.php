@@ -81,7 +81,7 @@ $stmt -> bindParam(':username', $_SESSION["username"]);
 
 //execute the query
 $stmt -> execute();
-
+ 
 //close connection
 $_pdo = null;
 
