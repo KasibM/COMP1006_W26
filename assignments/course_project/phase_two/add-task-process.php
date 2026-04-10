@@ -1,7 +1,9 @@
 <?php
 //require database connection script
 require "includes/connect.php"; 
+require "includes/auth.php";
 require "includes/header.php";
+
 
 //check if post
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -60,7 +62,8 @@ if (!empty($errors)) { ?>
 }
 
 //build query with named placeholder 
-$sql = "INSERT INTO tasks (task_name, task_category, task_priority, task_due_date, task_time, task_status) VALUES (:task_name, :task_category, :task_priority, :task_due_date, :task_time, :task_status)";
+$sql = "INSERT INTO tasks (task_name, task_category, task_priority, task_due_date, task_time, task_status, user) 
+        VALUES (:task_name, :task_category, :task_priority, :task_due_date, :task_time, :task_status, :username)";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -74,6 +77,7 @@ $stmt -> bindParam(':task_priority', $taskPriority);
 $stmt -> bindParam(':task_due_date', $taskDueDate);
 $stmt -> bindParam(':task_time', $taskTime);
 $stmt -> bindParam(':task_status', $taskStatus);
+$stmt -> bindParam(':username', $_SESSION["username"]);
 
 //execute the query
 $stmt -> execute();

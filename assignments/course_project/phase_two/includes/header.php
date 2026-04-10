@@ -1,3 +1,12 @@
+<?php
+//Check if logged in
+if (empty($_SESSION["user_id"])) {
+    $logOption = 'Login';
+} else {
+    $logOption = 'Logout';
+}
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
     <head>
@@ -24,6 +33,10 @@
                         <!-- Add New Tasks  -->
                         <li class="nav-item">
                             <a class="nav-link active" href="add-task.php">Add</a>
+                        </li>
+                        <!-- Login  -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<?= $logOption ?>.php"><?= $logOption ?></a>
                         </li>
                     </ul>
                 </div>

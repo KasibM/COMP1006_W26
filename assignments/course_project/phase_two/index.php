@@ -1,16 +1,33 @@
 <?php
+// Start or resume the session.
+session_start();
+
 //require database connection script
 require "includes/connect.php"; 
 require "includes/header.php";
+
+//Check if logged in
+if (empty($_SESSION["user_id"])) {
+    $userDisplay = 'You must be logged in to view tasks.  <a class="btn btn-secondary" href="login.php">Log in</a>';
+} else {
+    $userDisplay = "'s Tasks";
+}
 
 $whereCondition = " WHERE ";
 
 if (implode($_POST) === "" || implode($_POST) === null) {
     //build query 
-    $sql = "SELECT * FROM tasks ORDER BY task_status, task_due_date, task_priority, task_category";
+    $sql = "SELECT id, task_name, task_category, task_priority, task_due_date, task_time, task_status, task_status, task_created 
+            FROM tasks 
+            WHERE user = :username
+            ORDER BY task_status, task_due_date, task_priority, task_category";
 
     //prepare the query
     $stmt = $pdo->prepare($sql);
+
+    //map named placeholder to data
+    //e.g. $stmt -> bindParam(":first_name", firstName);
+    $stmt -> bindParam(':username', $_SESSION["username"]);
 
     //execute the query
     $stmt -> execute();
@@ -77,7 +94,7 @@ $_pdo = null;
 <main>
     <div class = "container-sm">
         <br>
-        <h2>Tasks</h2>
+        <h2><?= htmlspecialchars($_SESSION['username'])?><?= $userDisplay ?></h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <fieldset>
                 <div class = "row">

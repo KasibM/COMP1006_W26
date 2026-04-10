@@ -1,6 +1,7 @@
 <?php
 //require database connection script
 require "includes/connect.php";
+require "includes/auth.php";
 
 //check if post
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -31,7 +32,7 @@ if (!empty($errors)) { ?>
 
 
 //build query with named placeholder 
-$sql = "DELETE from tasks WHERE id = :task_id";
+$sql = "DELETE from tasks WHERE id = :task_id and user = :username";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -40,7 +41,7 @@ $stmt = $pdo->prepare($sql);
 //e.g. $stmt -> bindParam(":first_name", firstName);
 
 $stmt -> bindParam(':task_id', $taskID);
-
+$stmt -> bindParam(':username', $_SESSION["username"]);
 
 //execute the query
 $stmt -> execute();

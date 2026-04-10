@@ -1,8 +1,6 @@
 <?php
 //From Lesson 09
 
-// Start or resume the session.
-session_start( );
 // Sessions allow us to store login information across multiple pages.
 require "includes/connect.php";
 require "includes/header.php";
@@ -60,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username']; 
 
             // Redirect the user to the protected orders page
-            header("Location: orders.php"); 
+            header("Location: index.php");  
            
             // Stop the script immediately after redirecting
             exit; 

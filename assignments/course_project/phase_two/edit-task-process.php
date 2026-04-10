@@ -1,6 +1,7 @@
 <?php
 //require database connection script
 require "includes/connect.php"; 
+require "includes/auth.php";
 require "includes/header.php";
 
 //check if post
@@ -95,7 +96,7 @@ $sql = "UPDATE tasks
             task_due_date = :task_due_date,
             task_time = :task_time,
             task_status = :task_status
-        WHERE id = :task_id";
+        WHERE id = :task_id and user = :username";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -110,6 +111,7 @@ $stmt -> bindParam(':task_priority', $taskPriority);
 $stmt -> bindParam(':task_due_date', $taskDueDate);
 $stmt -> bindParam(':task_time', $taskTime);
 $stmt -> bindParam(':task_status', $taskStatus);
+$stmt -> bindParam(':username', $_SESSION["username"]);
 
 
 //execute the query

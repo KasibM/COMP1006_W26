@@ -42,7 +42,7 @@
                     <ul class="navbar-nav ms-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link" href="index.php">Home</a>
                         </li>
 
                         <li class="nav-item">
@@ -50,7 +50,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Order Online</a>
+                            <a class="nav-link" href="orders.php">Order Online</a>
                         </li>
 
                         <li class="nav-item">
