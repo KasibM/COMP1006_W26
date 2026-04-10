@@ -1,6 +1,6 @@
 <?php
 //From Lesson 09
-
+ 
 // logout.php
 // ------------------------------------------------------------
 // This page logs the user out by destroying their session

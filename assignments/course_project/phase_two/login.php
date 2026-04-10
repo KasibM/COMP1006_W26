@@ -4,7 +4,7 @@
 // Sessions allow us to store login information across multiple pages.
 require "includes/connect.php";
 require "includes/header.php";
-
+ 
 // Variable to store an error message if login fails
 $error = "";
 
