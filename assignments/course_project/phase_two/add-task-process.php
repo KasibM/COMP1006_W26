@@ -18,7 +18,6 @@ $taskDueDate  = trim(filter_input(INPUT_POST,'task_due_date',FILTER_SANITIZE_SPE
 $taskTime      = trim(filter_input(INPUT_POST,'task_time',FILTER_SANITIZE_SPECIAL_CHARS));
 $taskStatus    = trim(filter_input(INPUT_POST,'task_status',FILTER_SANITIZE_SPECIAL_CHARS));
 
-
 //validation
 
 $errors = [];
@@ -51,6 +50,39 @@ if(!($taskStatus === '0' || $taskStatus === '1')){
     $errors[]= "task_status must be 0 or 1.";
 }
 
+
+//From Lesson 10
+//check whether a file was uploaded
+if (isset($_FILES['task_instructions']) && $_FILES['task_instructions']['error'] !== UPLOAD_ERR_NO_FILE) {
+    //make sure upload completed successfully 
+    if ($_FILES['task_instructions']['error'] !== UPLOAD_ERR_OK) {
+        $errors[] = "There was a problem uploading your file!";
+    } else {
+        //only allow a few file types 
+        $allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        //detect the real MIME type of the file 
+        $detectedType = mime_content_type($_FILES['task_instructions']['tmp_name']);
+        if (!in_array($detectedType, $allowedTypes, true)) {
+            $errors[] = "Only PDF or docx allowed";
+        } else {
+            //build the file name and move it to where we want it to go (uploads)
+            //get the file extension 
+            $extension = pathinfo($_FILES['task_instructions']['name'], PATHINFO_EXTENSION);
+            //create a unique filename so uploaded files don't overwrite 
+            $safeFilename = uniqid('product_', true) . '.' . strtolower($extension);
+            //build the full server path where the file will be stored 
+            $destination = __DIR__ . '/uploads/' . $safeFilename;
+            if (move_uploaded_file($_FILES['task_instructions']['tmp_name'], $destination)) {
+                //save the relative path to the database
+                $filePath = 'uploads/' . $safeFilename; 
+            } else {
+                $errors[] = "Document uploaded failed!"; 
+            }
+        }
+    }
+}
+
+
 //if errors stop before inserting into the database
 if (!empty($errors)) { ?>
     <?php echo "Failed to insert data due to the following errors:\n";
@@ -62,8 +94,8 @@ if (!empty($errors)) { ?>
 }
 
 //build query with named placeholder 
-$sql = "INSERT INTO tasks (task_name, task_category, task_priority, task_due_date, task_time, task_status, user) 
-        VALUES (:task_name, :task_category, :task_priority, :task_due_date, :task_time, :task_status, :username)";
+$sql = "INSERT INTO tasks (task_name, task_category, task_priority, task_due_date, task_time, task_status, user, task_instructions) 
+        VALUES (:task_name, :task_category, :task_priority, :task_due_date, :task_time, :task_status, :username, :file_path)";
 
 //prepare the query
 $stmt = $pdo->prepare($sql);
@@ -78,6 +110,7 @@ $stmt -> bindParam(':task_due_date', $taskDueDate);
 $stmt -> bindParam(':task_time', $taskTime);
 $stmt -> bindParam(':task_status', $taskStatus);
 $stmt -> bindParam(':username', $_SESSION["username"]);
+$stmt -> bindParam(':file_path', $filePath);
 
 //execute the query
 $stmt -> execute();

@@ -2,8 +2,10 @@
 //From Lesson 09
 
 // Sessions allow us to store login information across multiple pages.
+session_start();
 require "includes/connect.php";
 require "includes/header.php";
+
  
 // Variable to store an error message if login fails
 $error = "";
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id']; 
             $_SESSION['username'] = $user['username']; 
 
-            // Redirect the user to the protected orders page
+            // Redirect the user to index.php
             header("Location: index.php");  
            
             // Stop the script immediately after redirecting

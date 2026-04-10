@@ -5,7 +5,7 @@ require 'includes/header.php';
  
 <main>
     <div class = "container-sm">
-        <form action="add-task-process.php" method="post">
+        <form action="add-task-process.php" enctype="multipart/form-data" method="post">
             <fieldset>
                 <br>
                 <legend>Add Task</legend>
@@ -36,6 +36,15 @@ require 'includes/header.php';
                 <!-- Task Time  -->
                 <label for="task_time" class="form-label">Time in Hours Spent</label>
                 <input type="number" id="task_time" name="task_time" step="0.5" min="0.0" max="12.0" placeholder="Hour(s)" class="form-control" />
+                <!-- Task Instructions Pdf or -->
+                <label for="task_instructions" class="form-label">Task Instructions (PDF or Word Document only)</label>
+                <input
+                    type="file"
+                    id="task_instructions"
+                    name="task_instructions"
+                    class="form-control mb-4"
+                    accept=".pdf, .docx"
+                >
             </fieldset>
             <br>
             <fieldset>

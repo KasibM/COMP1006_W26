@@ -8,5 +8,6 @@ CREATE TABLE tasks (
   task_time FLOAT(3,1),
   task_status BOOLEAN,
   task_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  user VARCHAR(50)
+  user VARCHAR(50),
+  task_instructions varchar(255)
 ); 
