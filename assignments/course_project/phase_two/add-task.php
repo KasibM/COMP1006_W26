@@ -41,11 +41,11 @@ require 'includes/header.php';
                 <!-- Task Status  -->
                 <legend>Task Status</legend>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_incomplete" name="task_status" value="0" required />
+                    <input class="form-check-input" type="radio" id="task_status_incomplete" name="task_status" value="0" checked />
                     <label class="form-check-label" for="task_status_incomplete">Incomplete</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_complete" name="task_status" value="1" required />
+                    <input class="form-check-input" type="radio" id="task_status_complete" name="task_status" value="1" />
                     <label class="form-check-label" for="task_status_complete">Complete</label>
                 </div>
             </fieldset>

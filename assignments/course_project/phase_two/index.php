@@ -130,6 +130,7 @@ $_pdo = null;
                     <th>Due Date</th>
                     <th>Time Spent (h)</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -160,6 +161,18 @@ $_pdo = null;
                             <?php else: ?>
                                 Incomplete
                             <?php endif;?>
+                        </td>
+                        <td>
+                            <a class="btn btn-secondary"
+                                href="edit-task.php?id=<?= urlencode($task['id']); ?>">
+                                Edit
+                            </a>
+                            <a
+                                class="btn btn-secondary"
+                                href="remove-task-process.php?id=<?= urlencode($task['id']); ?>"
+                                onclick="return confirm('Please confirm deletion of this task.');">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

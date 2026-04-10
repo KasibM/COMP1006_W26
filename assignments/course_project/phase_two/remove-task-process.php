@@ -1,15 +1,14 @@
 <?php
 //require database connection script
-require "includes/connect.php"; 
-require "includes/header.php";
+require "includes/connect.php";
 
 //check if post
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     die('Invalid request');
 }
 
 //get + sanitise values
-$taskID = trim(filter_input(INPUT_POST,'task_id',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskID = trim(filter_input(INPUT_GET,'id',FILTER_SANITIZE_SPECIAL_CHARS));
 
 
 //validation
@@ -25,7 +24,7 @@ if (!empty($errors)) { ?>
     <?php echo "Failed to remove data due to the following errors:\n";
     foreach ($errors as $error) : ?>
         <li><?php echo $error; ?> </li>
-<?php endforeach;
+    <?php endforeach;
     //stop the script from executing  
     exit;
 }
@@ -49,19 +48,9 @@ $stmt -> execute();
 //close connection
 $_pdo = null;
 
-
+//send back to index
+header("Location: index.php");
+exit;
 ?>
-<!-- display in html -->
+
  
-<main>
-    <div class = "container-sm">
-        <br>
-        <h2>Task Removed Successfully.</h2>
-        <br>
-        <p>
-            <a href="select-task-remove.php" class ="btn btn-secondary">Remove New Task</a>
-        </p>
-        
-    </div>
-</main>
-<?php require "includes/footer.php"; ?>

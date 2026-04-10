@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 //get + sanitise values
-$taskID      = trim(filter_input(INPUT_POST,'task_id',FILTER_SANITIZE_SPECIAL_CHARS));
+$taskID      = trim(filter_input(INPUT_GET,'id',FILTER_SANITIZE_SPECIAL_CHARS));
 $taskName      = trim(filter_input(INPUT_POST,'task_name',FILTER_SANITIZE_SPECIAL_CHARS));
 $taskCategory  = trim(filter_input(INPUT_POST,'task_category',FILTER_SANITIZE_SPECIAL_CHARS));
 $taskPriority  = trim(filter_input(INPUT_POST,'task_priority',FILTER_SANITIZE_SPECIAL_CHARS));
@@ -139,7 +139,7 @@ if ($taskStatus === "1") {
         "<br>Complete: ".$taskStatusWord?>
         </p>
         <p>
-            <a href="select-task-edit.php" class ="btn btn-secondary">Edit New Task</a>
+            <a class ="btn btn-secondary" href="select-task-edit.php">Edit New Task</a>
         </p>
         
     </div>

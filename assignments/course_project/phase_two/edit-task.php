@@ -4,11 +4,11 @@ require 'includes/header.php';
 
 
 //check if post
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     die('Invalid request');
 }
 
-$selectedTask = trim(filter_input(INPUT_POST,'task_id',FILTER_SANITIZE_SPECIAL_CHARS));
+$selectedTask = trim(filter_input(INPUT_GET,'id',FILTER_SANITIZE_SPECIAL_CHARS));
 
 //build query with named placeholder 
 $sql = "SELECT * FROM tasks WHERE id = :selected_task";
@@ -29,27 +29,23 @@ $task = $stmt->fetch();
 $_pdo = null;
 
 if ($task['task_status'] === 1 ): //saved as SQL boolean 0=false, 1=true 
-    $task['task_status'] = "Complete";
+    $statusComplete = 'checked';
+    $statusIncomplete = '';
 else: 
-    $task['task_status'] = "Incomplete";
+    $statusComplete = '';
+    $statusIncomplete = 'checked';
 endif;
 
 ?>
 
 <main>
     <div class = "container-sm">
-        <form action="edit-task-process.php" method="post">
+        <form action="edit-task-process.php?id=<?= urlencode($task['id']); ?>" method="post">
             <fieldset>
                 <br>
                 <legend>Edit Task</legend>
                 <p>ID: <?= htmlspecialchars($task['id']); ?> - Name: <?= htmlspecialchars($task['task_name']); ?></p>
                 <!-- Have to add line breaks because even though main.css (after bootstrap in header.php should outrank reboot.scss, bootstrap won't let me change anything, update: removed main.css -->
-                <br>
-                <!-- Name  -->
-                <p>Is this the correct task?</p>
-                <input class="form-check-input" type="checkbox" id="task_id" name="task_id" value="<?= htmlspecialchars($selectedTask); ?>" required />
-                <label for="task_id" class="form-label">Yes</label>
-                <br>
                 <br>
                 <!-- Name  -->
                 <label for="task_name" class="form-label">Task Name</label>
@@ -80,13 +76,12 @@ endif;
             <fieldset>
                 <!-- Task Status  -->
                 <legend>Task Status</legend>
-                <p>Currently: <?= htmlspecialchars($task['task_status']); ?></p>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_incomplete" name="task_status" value="0" />
+                    <input class="form-check-input" type="radio" id="task_status_incomplete" name="task_status" value="0" <?= htmlspecialchars($statusIncomplete); ?> />
                     <label class="form-check-label" for="task_status_incomplete">Incomplete</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="task_status_complete" name="task_status" value="1" />
+                    <input class="form-check-input" type="radio" id="task_status_complete" name="task_status" value="1" <?= htmlspecialchars($statusComplete); ?>/>
                     <label class="form-check-label" for="task_status_complete">Complete</label>
                 </div>
             </fieldset>
