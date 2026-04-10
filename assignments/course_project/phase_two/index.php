@@ -1,7 +1,7 @@
 <?php
 // Start or resume the session.
 session_start();
-
+ 
 //require database connection script
 require "includes/connect.php"; 
 require "includes/header.php";
