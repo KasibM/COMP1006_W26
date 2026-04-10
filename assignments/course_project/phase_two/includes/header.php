@@ -4,7 +4,7 @@ if (empty($_SESSION["user_id"])) {
     $logOption = 'Login';
 } else {
     $logOption = 'Logout';
-}
+} 
 ?>
 
 <!DOCTYPE html>
